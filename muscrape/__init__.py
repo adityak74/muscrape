@@ -1,0 +1,1 @@
+"""Muscrape package init file."""

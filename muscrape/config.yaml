@@ -1,0 +1,11 @@
+seed_search_queries:
+  - "artist:sajjad ali"
+  - "channel: nescafe basement"
+  - "playlist: coke studio pakistan"
+  - "album: coke studio"
+  - "sufi songs"
+  - "ghazals"
+  - "artist:mustafa zahid"
+  - "emraan hashmi songs"
+search_depth: 2
+debug_level: "debug"
