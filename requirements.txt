@@ -4,3 +4,4 @@ pytube
 pydantic
 PyYAML
 python-dotenv
+pandas
