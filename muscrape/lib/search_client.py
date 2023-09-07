@@ -1,5 +1,6 @@
 """Search Client"""
 
+from loguru import logger
 from typing import List, Optional
 from pytube import Search
 from muscrape.models.youtube_video import YouTubeVideo
@@ -45,15 +46,16 @@ class SearchClient:
             return None
         search = Search(query)
         results = search.results
+        if debug_level == "debug":
+            logger.debug("Search depth: " + str(depth))
+            logger.debug("Search results: " + str(len(search.results)))
         depth = depth - 1
         youtube_videos = []
-        if debug_level == "debug":
-            print("Search results: ", str(len(search.results)))
         if depth > 0:
             for i in range(0, depth):
                 search.get_next_results()
                 if debug_level == "debug":
-                    print("Search depth: ", str(depth - i - 1))
-                    print("Search results: ", str(len(search.results)))
+                    logger.debug("Search depth: " + str(depth - i - 1))
+                    logger.debug("Search results: " + str(len(search.results)))
         youtube_videos.extend(self.build_from_results(results))
         return youtube_videos

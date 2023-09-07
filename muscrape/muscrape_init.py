@@ -1,31 +1,38 @@
 """Muscrape is a Python package for scraping music data from the web."""
 # Path: muscrape/muscrape_init.py
 
+from loguru import logger
 from muscrape.lib.yaml_client import YAMLClient
 from muscrape.lib.json_client import JSONClient
 from muscrape.lib.search_client import SearchClient
 
 def main():
     """Main function"""
-    print("Welcome to Muscrape!")
+    logger.info("Starting Muscrape")
     config = YAMLClient().load("muscrape/config.yaml")
     if config.get("seed_search_queries") is None:
-        print("No seed search queries found in config.yaml")
+        logger.error("No seed search queries found in config.yaml")
         return
     search_depth = config["search_depth"]
     search_queries = config["seed_search_queries"]
+
+    total_search_queries = len(search_queries)
+    logger.info("Searching for " + str(total_search_queries) + " search queries")
+
+    i = 0
     debug_level = config["debug_level"]
     search_results_all = []
     for search_query in search_queries:
+        logger.info(str(i) + "/" + str(total_search_queries))
         search_results = SearchClient().search(search_query, search_depth, debug_level)
         for search_result in search_results:
             if debug_level == "debug":
-                print("search_result", search_result.model_dump())
+                logger.debug("Search result: " + str(search_result.model_dump()))
             search_results_all.append(search_result.model_dump())
-    # print(len(search_results_all))
-    # print("search result all first", search_results_all[0])
+        i += 1
     # write search results to json file
     JSONClient().dump("muscrape/data/search_results.json", search_results_all)
+    logger.info("Search results written to muscrape/data/search_results.json")
 
 
 if __name__ == "__main__":
