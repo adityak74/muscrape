@@ -9,7 +9,7 @@ load_dotenv()
 
 JSON_PATH = "muscrape/data/search_results.json"
 CSV_FOLDER_PATH = "muscrape/dataset"
-CSV_PATH = "muscrape/dataset/hindi_music_dataset.csv"
+CSV_PATH = "muscrape/dataset/indian_music_dataset.csv"
 
 with open(JSON_PATH, "r") as f:
     data = json.load(f)
