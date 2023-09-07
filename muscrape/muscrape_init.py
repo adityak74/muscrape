@@ -2,9 +2,12 @@
 # Path: muscrape/muscrape_init.py
 
 from loguru import logger
+from dotenv import load_dotenv
 from muscrape.lib.yaml_client import YAMLClient
 from muscrape.lib.json_client import JSONClient
 from muscrape.lib.search_client import SearchClient
+
+load_dotenv()
 
 def main():
     """Main function"""

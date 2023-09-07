@@ -31,5 +31,5 @@ seed_search_queries:
   - "tamil songs"
   - "telugu songs"
   - "kannada songs"
-search_depth: 25
+search_depth: 10
 debug_level: "debug"
