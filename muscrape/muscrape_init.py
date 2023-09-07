@@ -1,6 +1,7 @@
 """Muscrape is a Python package for scraping music data from the web."""
 # Path: muscrape/muscrape_init.py
 
+import random
 from loguru import logger
 from dotenv import load_dotenv
 from muscrape.lib.yaml_client import YAMLClient
@@ -18,7 +19,7 @@ def main():
         return
     search_depth = config["search_depth"]
     search_queries = config["seed_search_queries"]
-
+    random.shuffle(search_queries)
     total_search_queries = len(search_queries)
     logger.info("Searching for " + str(total_search_queries) + " search queries")
 
