@@ -2,7 +2,7 @@
 
 from loguru import logger
 from typing import List, Optional
-from pytube import Search
+from pytube import Search, YouTube
 from muscrape.models.youtube_video import YouTubeVideo
 
 class SearchClient:
@@ -17,7 +17,7 @@ class SearchClient:
             return False
         return True
     
-    def build_youtube_video_from_result(self, result) -> YouTubeVideo:
+    def build_youtube_video_from_result(self, result: YouTube) -> YouTubeVideo:
         """Build YouTube video from result"""
         youtube_video = YouTubeVideo(
             date=result.publish_date,
@@ -26,18 +26,24 @@ class SearchClient:
             duration=result.length,
             author=result.author,
             thumbnail=result.thumbnail_url,
-            url=result.watch_url
+            url=result.watch_url,
+            video_id=result.video_id,
         )
         return youtube_video
     
     def build_from_results(self, results) -> List[YouTubeVideo]:
         """Build from results"""
+        logger.info("Building YouTube videos from results")
+        logger.info("Results: " + str(len(results)))
         youtube_videos = []
         if results is None:
             return youtube_videos
         for result in results:
+            logger.debug("Building YouTube video from result for video: " + str(result.video_id))
             youtube_video = self.build_youtube_video_from_result(result)
             youtube_videos.append(youtube_video)
+            logger.debug("Added YouTube video id: " + str(result.video_id))
+        logger.info("YouTube videos built from results")
         return youtube_videos
 
     def search(self, query: str, depth: int, debug_level: str = "info") -> Optional[List[YouTubeVideo]]:

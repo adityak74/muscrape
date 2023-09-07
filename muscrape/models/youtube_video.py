@@ -11,6 +11,7 @@ class YouTubeVideo(BaseModel):
     author: str
     thumbnail: str
     url: str
+    video_id: str
 
     @field_serializer('date')
     def serialize_dt(self, dt: datetime, _info):
