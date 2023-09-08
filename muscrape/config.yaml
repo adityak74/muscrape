@@ -40,4 +40,4 @@ seed_search_queries:
   - "telugu songs"
   - "kannada songs"
 search_depth: 10
-debug_level: "info"
+debug_level: "debug"

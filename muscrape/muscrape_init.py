@@ -34,6 +34,8 @@ def main():
                 logger.debug("Search result: " + str(search_result.model_dump()))
             search_results_all.append(search_result.model_dump())
         i += 1
+        # save search queries to temporary file
+        JSONClient().dump("muscrape/data/search_results_temp.json", search_results_all)
     # write search results to json file
     JSONClient().dump("muscrape/data/search_results.json", search_results_all)
     logger.info("Search results written to muscrape/data/search_results.json")

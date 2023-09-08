@@ -52,12 +52,12 @@ class SearchClient:
             return None
         search = Search(query)
         results = search.results
-        search_suggestions = search.completion_suggestions
+        # search_suggestions = search.completion_suggestions
 
         if debug_level == "debug":
             logger.debug("Search depth: " + str(depth))
             logger.debug("Search results: " + str(len(search.results)))
-            logger.debug("Search suggestions: " + str(len(search_suggestions)))
+            # logger.debug("Search suggestions: " + str(len(search_suggestions)))
         depth = depth - 1
         youtube_videos = []
         if depth > 0:
