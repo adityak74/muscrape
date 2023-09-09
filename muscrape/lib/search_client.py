@@ -50,6 +50,7 @@ class SearchClient:
         """Search method"""
         if not self.validate_search_query(query):
             return None
+        logger.info("Searching for: " + query)
         search = Search(query)
         results = search.results
         # search_suggestions = search.completion_suggestions
