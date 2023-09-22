@@ -39,11 +39,9 @@ class SearchClient:
         if results is None:
             return youtube_videos
         for result in results:
-            logger.debug("Building YouTube video from result for video: " + str(result.video_id))
             youtube_video = self.build_youtube_video_from_result(result)
             youtube_videos.append(youtube_video)
-            logger.debug("Added YouTube video id: " + str(result.video_id))
-        logger.info("YouTube videos built from results")
+            logger.info(".")
         return youtube_videos
 
     def search(self, query: str, depth: int, debug_level: str = "info") -> Optional[List[YouTubeVideo]]:
@@ -71,5 +69,6 @@ class SearchClient:
                     break
                 except KeyError:
                     break
+                logger.info("Searching...")
         youtube_videos.extend(self.build_from_results(results))
         return youtube_videos

@@ -28,14 +28,18 @@ def main():
     search_results_all = []
     for search_query in search_queries:
         logger.info(str(i) + "/" + str(total_search_queries))
-        search_results = SearchClient().search(search_query, search_depth, debug_level)
-        for search_result in search_results:
-            if debug_level == "debug":
-                logger.debug("Search result: " + str(search_result.model_dump()))
-            search_results_all.append(search_result.model_dump())
-        i += 1
-        # save search queries to temporary file
-        JSONClient().dump("muscrape/data/search_results_temp.json", search_results_all)
+        try:
+            search_results = SearchClient().search(search_query, search_depth, debug_level)
+            for search_result in search_results:
+                if debug_level == "debug":
+                    logger.debug("Search result: " + str(search_result.model_dump()))
+                search_results_all.append(search_result.model_dump())
+            i += 1
+            # save search queries to temporary file
+            JSONClient().dump("muscrape/data/search_results_temp.json", search_results_all)
+        except Exception as e:
+            print("Exception e as :", e)
+            logger.info("Exception found in searching, so skipping query : " + search_query)
     # write search results to json file
     JSONClient().dump("muscrape/data/search_results.json", search_results_all)
     logger.info("Search results written to muscrape/data/search_results.json")
