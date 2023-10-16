@@ -10,7 +10,7 @@ from muscrape.lib.search_client import SearchClient
 
 load_dotenv()
 
-def main():
+def start():
     """Main function"""
     logger.info("Starting Muscrape")
     config = YAMLClient().load("muscrape/config.yaml")
@@ -46,4 +46,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    start()

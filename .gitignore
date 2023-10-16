@@ -4,3 +4,11 @@ data
 .env
 .DS_Store
 dataset
+enriched_comments/
+comments_*.csv
+*enriched*.csv
+.ipynb_checkpoints
+*comments*.csv
+build
+dist
+muscrape.egg-info/
